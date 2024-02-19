@@ -1,4 +1,3 @@
-//your JS code here. If required.
 var username = document.getElementById("username");
 var password = document.getElementById("password");
 var submit = document.getElementById("submit");
@@ -10,11 +9,11 @@ submit.addEventListener("click", (e) => {
   if (checkbox.checked) {
     localStorage.setItem("username", username.value);
     localStorage.setItem("password", password.value);
-    alert(`Logged in as .`);
+    alert(`Logged in as ${username.value}.`);
   } else {
     localStorage.removeItem("username");
     localStorage.removeItem("password");
-    alert(`Logged in as .`);
+    alert(`Logged in as ${username.value}.`);
   }
 });
 
@@ -28,5 +27,5 @@ if(localStorage.getItem("username")){
 
 var msg = document.getElementById("existing");
 msg.addEventListener("click",()=>{
-     alert(`Logged in as .`);
+     alert(`Logged in as ${localStorage.getItem('username')}.`);
 })
