@@ -1,26 +1,78 @@
-var username = document.getElementById("username");
-var password = document.getElementById("password");
-var submit = document.getElementById("submit");
-var checkbox = document.getElementById("checkbox");
-var form = document.getElementById("loginForm"); 
+//your code here
 
-submit.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (checkbox.checked) {
-    localStorage.setItem("username", username.value);
-    localStorage.setItem("password", password.value);
-  } else {
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-  }
-  alert(`Logged in as ${username.value}.`);
-  if (localStorage.getItem("username")) {
-    if (!document.getElementById("existing")) {
-      form.innerHTML += "<button id='existing'>Login as existing user.</button>";
-      var msg = document.getElementById("existing");
-      msg.addEventListener("click",()=>{
-        alert(`Logged in as ${localStorage.getItem('username')}.`);
-      });
-    }
-  }
+const form = document.querySelector(“form”);
+
+const usernameInput = document.querySelector(“#username”);
+
+const passwordInput = document.querySelector(“#password”);
+
+const rememberMeCheckbox = document.querySelector(“#checkbox”);
+
+const exisitingButton = document.querySelector(“#existing”);
+
+form.addEventListener(“submit”, (event) => {
+
+event.preventDefault();
+
+const username = usernameInput.value;
+
+const password = passwordInput.value;
+
+const rememberMe = rememberMeCheckbox.checked;
+
+if (rememberMe) {
+
+localStorage.setItem("username", username);
+
+localStorage.setItem("password", password);
+} else {
+
+localStorage.removeItem("username");
+
+localStorage.removeItem("password");
+}
+
+alert(Logged in as ${username});
+
+showButton();
+
+form.reset(); // Clear the form fields
+
 });
+
+function loginAsSaved() {
+
+const username = localStorage.getItem(“username”);
+
+const password = localStorage.getItem(“password”);
+
+if (username && password) {
+
+alert(`Logged in as ${username}`);
+
+form.reset();
+}
+
+}
+
+function showButton() {
+
+const username = localStorage.getItem(“username”);
+
+const password = localStorage.getItem(“password”);
+
+if (username && password) {
+
+exisitingButton.style.display = "block";
+} else {
+
+exisitingButton.style.display = "none";
+}
+
+}
+
+exisitingButton.style.display = “none”;
+
+exisitingButton.addEventListener(“click”, loginAsSaved);
+
+showButton();
